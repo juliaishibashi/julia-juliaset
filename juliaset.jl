@@ -1,10 +1,10 @@
 using Images, Colors, ColorSchemes
 
-function get_steps(c::Complex, max_steps)
-    z = Complex(0.0, 0.0) # complex num z = 0 + 0im
+function get_steps(z::Complex, c::Complex, max_steps)
+    # z = Complex(0.0, 0.0) # complex num z = 0 + 0im
     for i = 1:max_steps # 1 to max_steps
         z = z * z + c 
-        if abs(z) > 2 # |z| > 2 
+        if abs(z) > 2 # |z| > 2, stop the calculation
             return i
         end
     end
@@ -23,20 +23,13 @@ function get_color(colorscheme, step, max_steps)
     return [color.r, color.g, color.b]
 end
 
-function mandelbrot_plot()
-    width = 1000
-    height = 800
-
-    max_steps = 50
-    ##steps = zeros(Int, (height, width))
+function julia_plot(c::Complex; width=2400, height=1600, max_steps=100, colorscheme=ColorSchemes.inferno)
 
     #range for real values
-    cr_min = -1
+    cr_min = -2.0
     cr_max = 2
-
-    #range for imaginary values(adjust the position of the set)
-    ci_min = -1.6
-
+    #adj the position of the set
+    ci_min = -1.5
     dot_size = (cr_max - cr_min) / width 
     ci_max = ci_min + height * dot_size
 
@@ -49,7 +42,6 @@ function mandelbrot_plot()
     # Set the RGB values for the pixel at position (y, x)
     # 3×800×1000 Array
     image = zeros(Float64, (3, height, width)) 
-    colorscheme = ColorSchemes.inferno
 
     # Initialize x and y for tracking pixel coordinates in the image
     x,y = 1,1
@@ -57,8 +49,8 @@ function mandelbrot_plot()
     for ci = ci_min:dot_size:ci_max - dot_size #x-axis
         x = 1
         for cr = cr_min:dot_size:cr_max - dot_size #y-axis
-            c = Complex(cr, ci)
-            steps = get_steps(c, max_steps)
+            z = Complex(cr, ci)
+            steps = get_steps(z, c, max_steps)
             colors = get_color(colorscheme, steps, max_steps)
             image[:, y, x] = colors
             x += 1
@@ -66,8 +58,15 @@ function mandelbrot_plot()
         y += 1
     end
 
-    save("test.bmp", colorview(RGB, image))
+    save("julia_set.bmp", colorview(RGB, image))
 end
-mandelbrot_plot();
 
+print("Enter the real part of c: ")
+real_c = parse(Float64, readline())
 
+print("Enter the imaginary part of c: ")
+imag_c = parse(Float64, readline())
+
+c = Complex(real_c, imag_c)
+
+julia_plot(c)
