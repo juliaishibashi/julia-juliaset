@@ -1,3 +1,4 @@
+![Example](https://github.com/juliaishibashi/julia-juliaset/blob/main/julia_set.bmp)
 
 # Julia Set in Julia
 This project visually represents a Julia set fractal using custom complex numbers.
