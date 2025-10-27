@@ -10,7 +10,7 @@ This project visually represents a Julia set fractal using custom complex number
 `julia juliaset.jl`
 
 3. Input arbitrary values:
-Enter the real part of c: `0.285`
+Enter the real part of c: `0.285`<br>
 Enter the imaginary part of c: `0.01`
 
 ## Recommended Julia Set Values
