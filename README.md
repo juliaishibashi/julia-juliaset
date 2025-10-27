@@ -7,11 +7,11 @@ This project visually represents a Julia set fractal using custom complex number
 1. Install Julia: Download and install Julia from https://julialang.org/.
 
 2. Run the Program:
-`julia script_name.jl`
+`julia juliaset.jl`
 
-3. Input values:
-`Enter the real part of c: 0.285`
-`Enter the imaginary part of c: 0.01`
+3. Input arbitrary values:
+Enter the real part of c: `0.285`
+Enter the imaginary part of c: `0.01`
 
 ## Recommended Julia Set Values
 
